@@ -174,7 +174,7 @@ y1 <- predict(sandhills.lm,newdata=x1,
               interval="confidence")
 
 plot(y=x_vals$Total,x=log(x_vals$`# eBird Lists`),
-     ylab = ("Total Species"),xlab = "Lists",
+     ylab = ("Total Species"),xlab = "Log # of Lists",
      pch=19)
 matlines(x1,y1,lwd=2)
 ```
@@ -258,14 +258,16 @@ snbu <- x_vals[which(x_vals$`Snow Bunting`=="X"),]
 ```
 
 ``` r
-rlha_norm <- rlha$`Norm Ratio`
-snow_norm <- snow$`Norm Ratio`
-gyrf_norm <- gyrf$`Norm Ratio`
-mobl_norm <- mobl$`Norm Ratio`
-toso_norm <- toso$`Norm Ratio`
-core_norm <- core$`Norm Ratio`
-lalo_norm <- lalo$`Norm Ratio`
-snbu_norm <- snbu$`Norm Ratio`
+max_lists <- max(x_vals$`# eBird Lists`)
+
+rlha_norm <- rlha$`# eBird Lists`/max_lists
+snow_norm <- snow$`# eBird Lists`/max_lists
+gyrf_norm <- gyrf$`# eBird Lists`/max_lists
+mobl_norm <- mobl$`# eBird Lists`/max_lists
+toso_norm <- toso$`# eBird Lists`/max_lists
+core_norm <- core$`# eBird Lists`/max_lists
+lalo_norm <- lalo$`# eBird Lists`/max_lists
+snbu_norm <- snbu$`# eBird Lists`/max_lists
 ```
 
 We have different counts for everything, so we are going to do pairwise
@@ -285,7 +287,7 @@ wilcox.test(x = rlha_norm,y = snow_norm,alternative = "l",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  rlha_norm and snow_norm
-    ## W = 121, p-value = 0.283
+    ## W = 99, p-value = 0.09027
     ## alternative hypothesis: true location shift is less than 0
 
 ``` r
@@ -299,7 +301,7 @@ wilcox.test(x = rlha_norm,y = gyrf_norm,alternative = "l",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  rlha_norm and gyrf_norm
-    ## W = 63.5, p-value = 0.2091
+    ## W = 62.5, p-value = 0.1952
     ## alternative hypothesis: true location shift is less than 0
 
 ``` r
@@ -313,7 +315,7 @@ wilcox.test(x = rlha_norm,y = mobl_norm,alternative = "l",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  rlha_norm and mobl_norm
-    ## W = 162, p-value = 0.121
+    ## W = 190, p-value = 0.3322
     ## alternative hypothesis: true location shift is less than 0
 
 ``` r
@@ -327,7 +329,7 @@ wilcox.test(x = rlha_norm,y = toso_norm,alternative = "l",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  rlha_norm and toso_norm
-    ## W = 245, p-value = 0.4323
+    ## W = 252, p-value = 0.4955
     ## alternative hypothesis: true location shift is less than 0
 
 ``` r
@@ -341,7 +343,7 @@ wilcox.test(x = rlha_norm,y = core_norm,alternative = "l",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  rlha_norm and core_norm
-    ## W = 193, p-value = 0.3613
+    ## W = 168, p-value = 0.1557
     ## alternative hypothesis: true location shift is less than 0
 
 ``` r
@@ -369,7 +371,7 @@ wilcox.test(x = rlha_norm,y = snbu_norm,alternative = "l",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  rlha_norm and snbu_norm
-    ## W = 197.5, p-value = 0.5273
+    ## W = 180.5, p-value = 0.3457
     ## alternative hypothesis: true location shift is less than 0
 
 ``` r
@@ -384,7 +386,7 @@ wilcox.test(x = snow_norm,y = gyrf_norm,alternative = "l",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  snow_norm and gyrf_norm
-    ## W = 38, p-value = 0.3835
+    ## W = 42, p-value = 0.5169
     ## alternative hypothesis: true location shift is less than 0
 
 ``` r
@@ -398,7 +400,7 @@ wilcox.test(x = snow_norm,y = mobl_norm,alternative = "g",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  snow_norm and mobl_norm
-    ## W = 103, p-value = 0.5921
+    ## W = 129, p-value = 0.1925
     ## alternative hypothesis: true location shift is greater than 0
 
 ``` r
@@ -412,7 +414,7 @@ wilcox.test(x = snow_norm,y = toso_norm,alternative = "g",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  snow_norm and toso_norm
-    ## W = 145.5, p-value = 0.3196
+    ## W = 168.5, p-value = 0.09707
     ## alternative hypothesis: true location shift is greater than 0
 
 ``` r
@@ -426,7 +428,7 @@ wilcox.test(x = snow_norm,y = core_norm,alternative = "g",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  snow_norm and core_norm
-    ## W = 114, p-value = 0.4078
+    ## W = 121, p-value = 0.2981
     ## alternative hypothesis: true location shift is greater than 0
 
 ``` r
@@ -440,7 +442,7 @@ wilcox.test(x = snow_norm,y = lalo_norm,alternative = "g",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  snow_norm and lalo_norm
-    ## W = 155, p-value = 0.283
+    ## W = 177, p-value = 0.09027
     ## alternative hypothesis: true location shift is greater than 0
 
 ``` r
@@ -454,7 +456,7 @@ wilcox.test(x = snow_norm,y = snbu_norm,alternative = "g",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  snow_norm and snbu_norm
-    ## W = 117, p-value = 0.2602
+    ## W = 123, p-value = 0.1817
     ## alternative hypothesis: true location shift is greater than 0
 
 ``` r
@@ -469,7 +471,7 @@ wilcox.test(x = gyrf_norm,y = mobl_norm,alternative = "g",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  gyrf_norm and mobl_norm
-    ## W = 62.5, p-value = 0.5242
+    ## W = 72.5, p-value = 0.2927
     ## alternative hypothesis: true location shift is greater than 0
 
 ``` r
@@ -483,7 +485,7 @@ wilcox.test(x = gyrf_norm,y = toso_norm,alternative = "g",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  gyrf_norm and toso_norm
-    ## W = 90.5, p-value = 0.2536
+    ## W = 93.5, p-value = 0.2072
     ## alternative hypothesis: true location shift is greater than 0
 
 ``` r
@@ -497,7 +499,7 @@ wilcox.test(x = gyrf_norm,y = core_norm,alternative = "g",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  gyrf_norm and core_norm
-    ## W = 72, p-value = 0.3033
+    ## W = 68, p-value = 0.3926
     ## alternative hypothesis: true location shift is greater than 0
 
 ``` r
@@ -511,7 +513,7 @@ wilcox.test(x = gyrf_norm,y = lalo_norm,alternative = "g",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  gyrf_norm and lalo_norm
-    ## W = 97.5, p-value = 0.2091
+    ## W = 98.5, p-value = 0.1952
     ## alternative hypothesis: true location shift is greater than 0
 
 ``` r
@@ -525,7 +527,7 @@ wilcox.test(x = gyrf_norm,y = snbu_norm,alternative = "g",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  gyrf_norm and snbu_norm
-    ## W = 72.5, p-value = 0.2134
+    ## W = 68.5, p-value = 0.2945
     ## alternative hypothesis: true location shift is greater than 0
 
 ``` r
@@ -540,7 +542,7 @@ wilcox.test(x = mobl_norm,y = toso_norm,alternative = "l",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  mobl_norm and toso_norm
-    ## W = 234, p-value = 0.8397
+    ## W = 213, p-value = 0.6634
     ## alternative hypothesis: true location shift is less than 0
 
 ``` r
@@ -554,7 +556,7 @@ wilcox.test(x = mobl_norm,y = core_norm,alternative = "l",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  mobl_norm and core_norm
-    ## W = 185, p-value = 0.7716
+    ## W = 147, p-value = 0.3231
     ## alternative hypothesis: true location shift is less than 0
 
 ``` r
@@ -568,7 +570,7 @@ wilcox.test(x = mobl_norm,y = lalo_norm,alternative = "g",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  mobl_norm and lalo_norm
-    ## W = 252, p-value = 0.121
+    ## W = 224, p-value = 0.3322
     ## alternative hypothesis: true location shift is greater than 0
 
 ``` r
@@ -582,7 +584,7 @@ wilcox.test(x = mobl_norm,y = snbu_norm,conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  mobl_norm and snbu_norm
-    ## W = 186.5, p-value = 0.2756
+    ## W = 154.5, p-value = 0.9736
     ## alternative hypothesis: true location shift is not equal to 0
 
 ``` r
@@ -597,7 +599,7 @@ wilcox.test(x = toso_norm,y = core_norm,alternative = "l",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  toso_norm and core_norm
-    ## W = 190.5, p-value = 0.4245
+    ## W = 162.5, p-value = 0.1705
     ## alternative hypothesis: true location shift is less than 0
 
 ``` r
@@ -611,7 +613,7 @@ wilcox.test(x = toso_norm,y = lalo_norm,alternative = "g",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  toso_norm and lalo_norm
-    ## W = 261, p-value = 0.4323
+    ## W = 254, p-value = 0.4955
     ## alternative hypothesis: true location shift is greater than 0
 
 ``` r
@@ -625,7 +627,7 @@ wilcox.test(x = toso_norm,y = snbu_norm,alternative = "g",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  toso_norm and snbu_norm
-    ## W = 194.5, p-value = 0.4214
+    ## W = 173.5, p-value = 0.6543
     ## alternative hypothesis: true location shift is greater than 0
 
 ``` r
@@ -640,7 +642,7 @@ wilcox.test(x = core_norm,y = lalo_norm,alternative = "g",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  core_norm and lalo_norm
-    ## W = 221, p-value = 0.3613
+    ## W = 246, p-value = 0.1557
     ## alternative hypothesis: true location shift is greater than 0
 
 ``` r
@@ -654,7 +656,7 @@ wilcox.test(x = core_norm,y = snbu_norm,alternative = "g",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  core_norm and snbu_norm
-    ## W = 165, p-value = 0.352
+    ## W = 168, p-value = 0.316
     ## alternative hypothesis: true location shift is greater than 0
 
 ``` r
@@ -669,7 +671,7 @@ wilcox.test(x = lalo_norm,y = snbu_norm,alternative = "l",conf.level = 0.1)
     ##  Wilcoxon rank sum test with continuity correction
     ## 
     ## data:  lalo_norm and snbu_norm
-    ## W = 197.5, p-value = 0.5273
+    ## W = 180.5, p-value = 0.3457
     ## alternative hypothesis: true location shift is less than 0
 
 # Boxplot
